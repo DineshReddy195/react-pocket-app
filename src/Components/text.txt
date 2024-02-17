@@ -1,0 +1,102 @@
+function Groups() {
+  const [open, setOpen] = useState(false);
+  const [profile, setProfile] = useState("");
+  const [newGroup, setNewGroup] = useState([]);
+  const colors = ['#B38BFA','#FF79F2','#43E6FC','#F19576','#0047FF','#6691FF'];
+  const [color, setColor] = useState("");
+
+   useEffect(() => {
+    const storedData = localStorage.getItem("myGroups");
+    if (storedData) {
+      setNewGroup(JSON.parse(storedData));
+    }
+  }, []);
+
+  const openModal = () => {
+    setOpen(true);
+  };
+
+  const closeModal = () => {
+    setOpen(false);
+  };
+
+  const addGroup = () => {
+    setOpen(false);
+    const newData = {
+      title: profile,
+      id: Date.now()
+    };
+    setNewGroup(prevGroups => {
+      const updatedGroups = [...prevGroups, newData];
+      localStorage.setItem("myGroups", JSON.stringify(updatedGroups));
+      return updatedGroups;
+    });
+  };
+
+  const handleChange = e => {
+    setProfile(e.target.value);
+  };
+  
+  const updateGroupColor = (groupId, newColor) => {
+    setNewGroup(prevGroups => {
+      const updatedGroups = prevGroups.map(group => {
+        if (group.id === groupId) {
+          return { ...group, color: newColor }; // Assign the new color to the specific group
+        }
+        return group;
+      });
+      localStorage.setItem("myGroups", JSON.stringify(updatedGroups));
+      return updatedGroups;
+    });
+  };
+
+
+
+  return (
+    <div className="groups">
+    <h1 className="title">Pocket Notes</h1>
+      <button className="add" onClick={openModal}>
+        +
+      </button>
+      <Modal open={open} center onClose={closeModal} classNames='modal'>
+        <h2>Create New Group</h2>
+        <span className="label1">Group Name</span>&nbsp;&nbsp;
+        <input
+          type="text"
+          name="group-name"
+          placeholder="Enter group name"
+          className="text"
+          onChange={handleChange}
+        />
+        <br />
+        <br />
+        <span>Choose Color</span> &nbsp; &nbsp;
+        {colors.map((currColor, index) => {
+          return (
+            <button
+              key={index}
+              style={{ backgroundColor: currColor }}
+              className={color === currColor ? "colors active" : "colors"}
+              onClick={() => {
+                setColor(currColor);
+              }}
+            ></button>
+          );
+        })}
+        <br />
+        <br />
+        <button className="create" onClick={addGroup}>
+          Create
+        </button>
+      </Modal>
+      
+      <div className="groups-name">
+        <Context.Provider value={[newGroup, color, profile, updateGroupColor]}>
+          <Groupnames selectedColor={color} />
+        </Context.Provider>
+      </div>
+      
+    </div>
+  );
+}
+export default Groups;

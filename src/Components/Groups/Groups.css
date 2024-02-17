@@ -1,0 +1,93 @@
+.groups{
+    background-color: #fff;
+  height: 100%;
+  width: 30%;
+}
+.title{
+    text-align: center;
+}
+
+.groups-name{
+    overflow: auto;
+    max-height: 80%;
+}
+.add{
+    background-color: #16008B;
+    font-size: xx-large;
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    outline: none;
+    cursor: pointer;
+    width: 40px;
+    position: absolute;
+    bottom: 5%;
+    left: 25%;
+}
+.create{
+    background-color: #16008B;
+    font-size: small;
+    color: #fff;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 0 10px;
+    border-radius: 5px;
+    height: 30px;
+    width: 100px;
+    position: relative;
+    left: 60%;
+}  
+.text{
+    border-radius: 10px;
+    outline: none;
+    border: 1px solid black;
+}
+.text::placeholder{
+    padding-left: 20px;
+}
+  .colors{
+    border-radius: 50%;
+    width: 2rem;
+    height: 2rem;
+    background-color: #000;
+    margin-left: 1rem;
+    border: none;
+    outline: none;
+    opacity: 0.5;
+    cursor: pointer;
+  }
+  .colors:hover{
+    opacity: 1;
+  }
+  .active{
+    opacity: 1;
+  }
+  /* .chat{
+    display: flex;
+  } */
+  @media screen  and (max-width:480px){
+    .groups{
+      background-color: #fff;
+      height: 100%;
+      width: 300% !important;
+    }
+    .add{
+      background-color: #16008B;
+    font-size: xx-large;
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    outline: none;
+    cursor: pointer;
+    width: 40px;
+    position: absolute;
+    bottom: 45%;
+    left: 45%;
+    }
+    .modal{
+      width: 60%;
+      position: absolute;
+      left: 0%;
+    }
+  }
